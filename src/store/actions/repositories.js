@@ -1,9 +1,9 @@
-export const addRepositorie = repositorie => ({
-  type: "ADD_REPOSITORIE",
-  payload: repositorie
+export const addRepository = repository => ({
+  type: "ADD_REPOSITORY",
+  payload: repository
 });
 
-export const removerRepositorie = repositorieId => ({
-  type: "REMOVE_REPOSITORIE",
-  payload: repositorieId
+export const removerRepository = repositoryId => ({
+  type: "REMOVE_REPOSITORY",
+  payload: repositoryId
 });

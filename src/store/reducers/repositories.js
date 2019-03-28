@@ -17,7 +17,7 @@ const INITIAL_STATE = {
 
 const repositories = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "ADD_REPOSITORIE":
+    case "ADD_REPOSITORY":
       return {
         data: [...state.data, { id: Math.random(), name: action.payload }]
       };
