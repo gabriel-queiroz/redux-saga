@@ -26,6 +26,10 @@ const repositories = (state = INITIAL_STATE, action) => {
       return {
         data: [...state.data, { id: Math.random(), name: action.payload }]
       };
+    case Types.REMOVE_REPOSITORY:
+      return {
+        data: [...state.data.filter(repo => repo.id !== action.payload)]
+      };
     default:
       break;
   }
@@ -39,7 +43,7 @@ export const Creators = {
     type: Types.ADD_REPOSITORY,
     payload: repository
   }),
-  removerRepository: repositoryId => ({
+  removeRepository: repositoryId => ({
     type: Types.REMOVE_REPOSITORY,
     payload: repositoryId
   })

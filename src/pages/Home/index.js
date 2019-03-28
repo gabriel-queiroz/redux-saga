@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Creators as RepositoriesActions } from "../../store/ducks/repositories";
 
-const Home = ({ repositories, addRepository }) => {
+const Home = ({ repositories, addRepository, removeRepository }) => {
   const [repository, setRepository] = useState("");
 
   const handleChangeRepository = e => {
@@ -13,7 +13,10 @@ const Home = ({ repositories, addRepository }) => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    alert("submetendo");
+    if (!!repository) {
+      addRepository(repository);
+      setRepository("");
+    }
   };
 
   return (
@@ -26,13 +29,21 @@ const Home = ({ repositories, addRepository }) => {
           value={repository}
           onChange={handleChangeRepository}
         />
+        <button type="submit">adicionar</button>
       </form>
       <ul>
         {repositories.map(repo => (
-          <li key={repo.id}> {repo.name} </li>
+          <li style={{ marginBottom: "10px" }} key={repo.id}>
+            <span>{repo.name}</span>
+            <button
+              onClick={() => removeRepository(repo.id)}
+              style={{ marginLeft: "10px" }}
+            >
+              remover
+            </button>
+          </li>
         ))}
       </ul>
-      <button onClick={() => addRepository("comer")}>cliquem-me</button>
     </div>
   );
 };
