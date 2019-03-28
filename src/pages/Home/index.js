@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as ActionsCreators from "../../store/actions/repositories";
+import { Creators as RepositoriesActions } from "../../store/ducks/repositories";
 
 const Home = ({ repositories, addRepository }) => {
   const [repository, setRepository] = useState("");
@@ -38,7 +38,7 @@ const Home = ({ repositories, addRepository }) => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(ActionsCreators, dispatch);
+  bindActionCreators(RepositoriesActions, dispatch);
 
 const mapStateToProps = state => ({
   repositories: state.repositories.data

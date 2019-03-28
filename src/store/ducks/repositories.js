@@ -1,3 +1,8 @@
+export const Types = {
+  ADD_REPOSITORY: "REPOSITORIES/ADD_REPOSITORY",
+  REMOVE_REPOSITORY: "REPOSITORIES/REMOVE_REPOSITORY"
+};
+
 const INITIAL_STATE = {
   data: [
     {
@@ -17,7 +22,7 @@ const INITIAL_STATE = {
 
 const repositories = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "ADD_REPOSITORY":
+    case Types.ADD_REPOSITORY:
       return {
         data: [...state.data, { id: Math.random(), name: action.payload }]
       };
@@ -28,3 +33,14 @@ const repositories = (state = INITIAL_STATE, action) => {
 };
 
 export default repositories;
+
+export const Creators = {
+  addRepository: repository => ({
+    type: Types.ADD_REPOSITORY,
+    payload: repository
+  }),
+  removerRepository: repositoryId => ({
+    type: Types.REMOVE_REPOSITORY,
+    payload: repositoryId
+  })
+};
