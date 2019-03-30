@@ -1,12 +1,11 @@
-import React, { Component } from "react";
-import Home from "./pages/Home";
-import { Provider } from "react-redux";
-import store from "./store";
-import "./config/reactotron";
+import React, { Component } from 'react';
+import './config/reactotron';
+import { Provider } from 'react-redux';
+import Home from './pages/Home';
+import store from './store';
 
 class App extends Component {
   render() {
-    console.tron.log("aaa");
     return (
       <Provider store={store}>
         <Home />
