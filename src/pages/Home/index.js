@@ -1,21 +1,23 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Creators as RepositoriesActions } from "../../store/ducks/repositories";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as RepositoriesActions } from '../../store/ducks/repositories';
 
-const Home = ({ repositories, addRepository, removeRepository }) => {
-  const [repository, setRepository] = useState("");
+const Home = ({
+  repositories, loading, error, addRepository, removeRepository,
+}) => {
+  const [repository, setRepository] = useState('');
 
-  const handleChangeRepository = e => {
+  const handleChangeRepository = (e) => {
     const { value } = e.target;
     setRepository(value);
   };
 
-  const handleFormSubmit = e => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (!!repository) {
+    if (repository) {
       addRepository(repository);
-      setRepository("");
+      setRepository('');
     }
   };
 
@@ -31,14 +33,13 @@ const Home = ({ repositories, addRepository, removeRepository }) => {
         />
         <button type="submit">adicionar</button>
       </form>
+      {loading && <span>carregando...</span>}
+      {error && <span style={{ color: '#f53' }}>{error}</span>}
       <ul>
         {repositories.map(repo => (
-          <li style={{ marginBottom: "10px" }} key={repo.id}>
+          <li style={{ marginBottom: '10px' }} key={repo.id}>
             <span>{repo.name}</span>
-            <button
-              onClick={() => removeRepository(repo.id)}
-              style={{ marginLeft: "10px" }}
-            >
+            <button onClick={() => removeRepository(repo.id)} style={{ marginLeft: '10px' }}>
               remover
             </button>
           </li>
@@ -48,14 +49,15 @@ const Home = ({ repositories, addRepository, removeRepository }) => {
   );
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(RepositoriesActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(RepositoriesActions, dispatch);
 
 const mapStateToProps = state => ({
-  repositories: state.repositories.data
+  repositories: state.repositories.data,
+  loading: state.repositories.loading,
+  error: state.repositories.error,
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Home);
